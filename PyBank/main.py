@@ -7,8 +7,8 @@ print('-------------------------')
 import os
 import csv
 
-#Lists to store data
-months = []
+#Variables
+months = 0
 
 
 
@@ -19,5 +19,7 @@ csvpybank = os.path.join("Resources", "budget_data.csv")
 #open the csv
 with open(csvpybank) as csvfile:
     csvreader = csv.reader(csvfile, delimiter=",")
+    header = next(csvreader)
     for row in csvreader:
-        print(row)
+        months = months + 1
+print(f"Total Months: {months}")
