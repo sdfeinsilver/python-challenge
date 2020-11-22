@@ -1,9 +1,4 @@
-#print title
-print('Financial Analysis')
-print('-------------------------')
-
-#READ CSV File
-#import necessary modules
+#import modules
 import os
 import csv
 
@@ -12,26 +7,15 @@ months = 0
 net_amount = 0
 
 #create path to csv
-csvpybank = os.path.join("PyBank", "Resources", "budget_data.csv")
+csvpybank = os.path.join("./", "Resources", "budget_data.csv")
 
-#os.chdir("\Users\Setup\Desktop\Simon-Rice\Homework\python-challenge\PyBank\Resources\")
-
-#open the csv
+#Read the CSV and skip the header row
 with open(csvpybank) as csvfile:
     csvreader = csv.reader(csvfile, delimiter=",")
     header = next(csvreader)
     
     #Create List to add monthly changes
     change_list = []
-    
-    #After the header, read each row    
-    #for row in csvreader:
-
-        #Total number of months        
-        #months = months + 1
-
-        #Net Amount of Profits/Losses
-        #net_amount = net_amount + int(row[1])
 
     #Convert to list
     csvreader = list(csvreader)
@@ -57,6 +41,11 @@ with open(csvpybank) as csvfile:
     min_index = change_list.index(min_profit)
     min_month = csvreader[min_index + 1][0]
 
+#print title
+print('Financial Analysis')
+print('-------------------------')
+
+
 #Print your Data
 print(f"Total Months: {months}")
 print(f"Net Amount: {net_amount}")
@@ -64,7 +53,20 @@ print(f"Average Change: {calc_avg}")
 print(f"Greatest Increase in Profits: {max_month} " + f"({max_profit})")
 print(f"Greatest Decrease in Profits: {min_month} " + f"({min_profit})")
 
-#Print Results to text file (Work on this!)
-import sys
-sys.stdout = open('output.txt', 'w')
-sys.stdout.close()
+#Print Results to text file
+output_file = os.path.join('./', 'Analysis', 'analysis.txt')
+with open(output_file, 'w', newline='') as text_file:
+    text_file.write('Financial Analysis')
+    text_file.write("\n")
+    text_file.write('-------------------------')
+    text_file.write("\n")
+    text_file.write("\n")
+    text_file.write(f"Total Months: {months}")
+    text_file.write("\n")
+    text_file.write(f"Net Amount: {net_amount}")
+    text_file.write("\n")
+    text_file.write(f"Average Change: {calc_avg}")
+    text_file.write("\n")
+    text_file.write(f"Greatest Increase in Profits: {max_month} " + f"({max_profit})")
+    text_file.write("\n")
+    text_file.write(f"Greatest Decrease in Profits: {min_month} " + f"({min_profit})")
